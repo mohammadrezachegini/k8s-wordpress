@@ -14,13 +14,19 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: wprdpress:5.7
+        image: wordpress:5.7
         env:
+        - name: WORDPRESS_DB_HOST
+          value: mysql
+        - name: WORDPRESS_DB_USER
+          value: wpuser
+        - name: WORDPRESS_DB_NAME
+          value: wpdb
+        - name: WORDPRESS_DEBUG
+          value: “1”
+
         - name: WORDPRESS_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: secret-with-random-password
-              key: password
+          value: cGFzc3dvcmQ=
         ports:
         - containerPort: 80
 
